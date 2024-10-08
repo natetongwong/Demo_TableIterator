@@ -4,11 +4,11 @@ from prophecy.config import ConfigBase
 
 class Config(ConfigBase):
 
-    def __init__(self, TableIterator: dict=None, **kwargs):
+    def __init__(self, TableIterator: dict=None, catalog_name: str=None, schema_name: str=None, **kwargs):
         self.spark = None
-        self.update(TableIterator)
+        self.update(TableIterator, catalog_name, schema_name)
 
-    def update(self, TableIterator: dict={}, **kwargs):
+    def update(self, TableIterator: dict={}, catalog_name: str="ntong", schema_name: str="default", **kwargs):
         prophecy_spark = self.spark
         self.TableIterator = self.get_config_object(
             prophecy_spark, 
@@ -16,4 +16,6 @@ class Config(ConfigBase):
             TableIterator, 
             TableIterator_Config
         )
+        self.catalog_name = catalog_name
+        self.schema_name = schema_name
         pass

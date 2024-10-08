@@ -21,9 +21,7 @@ class TableIterator(MetaGemExec):
 
     def apply(self, spark: SparkSession, in0: DataFrame, ) -> None:
         inDFs = []
-        conf_to_column = dict(
-            [("source_path", "source_path"), ("target_table", "target_table"), ("timestamp", "timestamp")]
-        )
+        conf_to_column = dict([("source_path", "source"), ("target_table", "target"), ("timestamp", "timestamp")])
 
         if in0.count() > 1000:
             raise Exception(f"Config DataFrame row count::{in0.count()} exceeds max run count")
